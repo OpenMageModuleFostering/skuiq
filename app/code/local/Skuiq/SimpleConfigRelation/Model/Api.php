@@ -22,12 +22,15 @@ class Skuiq_SimpleConfigRelation_Model_Api extends Mage_Catalog_Model_Api_Resour
     {
         try {
             $_product = Mage::getModel('catalog/product')->load($configurableProduct);
-            $result = Mage::getResourceSingleton('catalog/product_type_configurable')->saveProducts($_product, $childProduct);
+
+            $childIds     = $_product->getTypeInstance()->getUsedProductIds();
+            $new_children = array_merge($childIds, $childProduct);
+
+            $result = Mage::getResourceSingleton('catalog/product_type_configurable')->saveProducts($_product, $new_children);
             return true;
         } catch (Exception $e) {
-            return __error($e);
+            return false;
         }
-        //return $result;
     }
 
     public function getChildsByParentId()
