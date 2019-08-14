@@ -58,10 +58,10 @@
       // Send stock adj. to SKU IQ
       <sales_order_creditmemo_save_after>
         <observers>
-          <genmato_stockupdate>
+          <skuiq_stockupdate>
             <class>skuiq_logproductupdate/observer</class>
             <method>refundOrderInventory</method>
-          </genmato_stockupdate>
+          </skuiq_stockupdate>
         </observers>
       </sales_order_creditmemo_save_after>
     </events>

@@ -3,19 +3,23 @@ class Skuiq_SimpleConfigRelation_Model_Api extends Mage_Catalog_Model_Api_Resour
 {
     public function getRelationship($productId, $storeId = null)
     {
-        $result = array();
-        $this->_configProductId = $productId;
-        $product = $this->_getProduct($productId, $storeId);
-        $this->_getProduct = Mage::getModel('catalog/product');
+        try {
+            $result = array();
+            $this->_configProductId = $productId;
+            $product = $this->_getProduct($productId, $storeId);
+            $this->_getProduct = Mage::getModel('catalog/product');
 
-        // $this->_getProduct->setStoreId($storeId);
-        $this->_getProduct->load($productId);
+            // $this->_getProduct->setStoreId($storeId);
+            $this->_getProduct->load($productId);
 
-        if ($this->_getProduct->getId()) {
-            $result['optiondata']=$this->alldropdownData();
+            if ($this->_getProduct->getId()) {
+                $result['optiondata']=$this->alldropdownData();
+            }
+
+            return $result;
+        } catch (Exception $e) {
+            Mage::log("Error in getRelationship", null, 'config-relations.txt');
         }
-
-        return $result;
     }
 
     public function addRelationship($configurableProduct, $childProduct)
@@ -29,6 +33,7 @@ class Skuiq_SimpleConfigRelation_Model_Api extends Mage_Catalog_Model_Api_Resour
             $result = Mage::getResourceSingleton('catalog/product_type_configurable')->saveProducts($_product, $new_children);
             return true;
         } catch (Exception $e) {
+            Mage::log("Error in addRelationship", null, 'config-relations.txt');
             return false;
         }
     }
