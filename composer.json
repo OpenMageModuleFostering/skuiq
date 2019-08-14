@@ -1,0 +1,16 @@
+{
+    "name": "OpenMageModuleFostering/SKUIQ",
+    "type": "magento-module",
+    "license": "Open",
+    "homepage": "",
+    "description": "Allows sync of products and sales from Magento to SKU IQ",
+    "authors": [
+    {
+        "name": "Boutiika Labs",
+        "email": "dev@skuiq.com"
+    }
+],
+    "suggest": {
+        "magento-hackathon/magento-composer-installer": "*"
+    }
+}

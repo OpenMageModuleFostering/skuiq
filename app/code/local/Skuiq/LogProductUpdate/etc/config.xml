@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <modules>
+    <Skuiq_RestConnect>
+      <version>0.0.1</version>
+    </Skuiq_RestConnect>
+  </modules>
+
+  <global>
+    <models>
+      <skuiq_logproductupdate>
+        <class>Skuiq_LogProductUpdate_Model</class>
+      </skuiq_logproductupdate>
+    </models>
+
+    <events>
+      <catalog_product_save_commit_after>
+        <observers>
+          <skuiq_logproductupdate>
+            <class>skuiq_logproductupdate/observer</class>
+            <method>logUpdate</method>
+            <type>singleton</type>
+          </skuiq_logproductupdate>
+
+          <skuiq_logproductupdate2>
+            <class>skuiq_logproductupdate/observer</class>
+            <method>jsonFile</method>
+            <type>singleton</type>
+          </skuiq_logproductupdate2>
+        </observers>
+      </catalog_product_save_commit_after>
+
+      // Catches if a sale gets cancelled prior to invoice
+      // Send stock adj. to SKU IQ
+      <!--
+      <sales_order_item_cancel_save_commit_after>
+        <observers>
+          <skuiq_log_quantity_changes>
+            <type>model</type>
+            <class>skuiq_logproductupdate/observer</class>
+            <method>stockChange</method>
+          </skuiq_log_quantity_changes>
+        </observers>
+      </sales_order_item_cancel_save_commit_after>
+      -->
+
+      <cataloginventory_stock_item_save_commit_after>
+        <observers>
+          <skuiq_log_quantity_changes>
+            <type>model</type>
+            <class>skuiq_logproductupdate/observer</class>
+            <method>stockChange</method>
+          </skuiq_log_quantity_changes>
+        </observers>
+      </cataloginventory_stock_item_save_commit_after>
+
+      // Catches if a sale gets cancelled post invoice - i.e. via credit memo
+      // Send stock adj. to SKU IQ
+      <sales_order_creditmemo_save_after>
+        <observers>
+          <genmato_stockupdate>
+            <class>skuiq_logproductupdate/observer</class>
+            <method>refundOrderInventory</method>
+          </genmato_stockupdate>
+        </observers>
+      </sales_order_creditmemo_save_after>
+    </events>
+  </global>
+</config>

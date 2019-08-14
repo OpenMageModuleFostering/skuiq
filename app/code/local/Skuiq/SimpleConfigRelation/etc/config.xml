@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Skuiq_SimpleConfigRelation>
+      <version>0.1.0</version>
+    </Skuiq_SimpleConfigRelation>
+  </modules>
+  <global>
+    <helpers>
+      <simpleconfigrelation>
+        <class>Skuiq_SimpleConfigRelation_Helper</class>
+      </simpleconfigrelation>
+    </helpers>
+    <models>
+      <simpleconfigrelation>
+        <class>Skuiq_SimpleConfigRelation_Model</class>
+        <resourceModel>simpleconfigrelation_mysql4</resourceModel>
+      </simpleconfigrelation>
+    </models>
+  </global>
+</config>

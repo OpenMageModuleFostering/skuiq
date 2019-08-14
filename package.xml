@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package>
+    <name>SKUIQ</name>
+    <version>1.2.2</version>
+    <stability>stable</stability>
+    <license>Open</license>
+    <channel>community</channel>
+    <extends/>
+    <summary>Allows sync of products and sales from Magento to SKU IQ</summary>
+    <description>Allows sync of products and sales from Magento to SKU IQ</description>
+    <notes>Now includes inventory tracking for cancelled and fully or partially credited sales.</notes>
+    <authors><author><name>Boutiika Labs</name><user>SKUIQ</user><email>dev@skuiq.com</email></author></authors>
+    <date>2015-02-26</date>
+    <time>17:54:57</time>
+    <contents><target name="magelocal"><dir name="Skuiq"><dir name="LogProductUpdate"><dir name="Model"><file name="Observer.php" hash="b21325c560e161e8522c7cdcdd3fb289"/></dir><dir name="etc"><file name="config.xml" hash="362ccb945d56d0e09bc64bdec4d7b2e8"/></dir><file name=".DS_Store" hash="5c077e7e7765c52ee6bd8ea1883d84d5"/></dir><dir name="SendSaleInfo"><dir name="Model"><file name="Observer.php" hash="dbc07f52c96bd3831e875df0135ea60a"/></dir><dir name="etc"><file name="config.xml" hash="9499133489324d19dc03c2a8f7a95e3e"/></dir></dir><dir name="SimpleConfigRelation"><dir name="Helper"><file name="Data.php" hash="3ef946f780001355f51a05c238c14886"/></dir><dir name="Model"><file name="Api.php" hash="e21de6bd6c6198bbe925c76e85e28f8e"/><file name=".DS_Store" hash="194577a7e20bdcc7afbb718f502c134c"/></dir><dir name="etc"><file name="api.xml" hash="4cc6bbf973cd7d7af47c6ea14af1e927"/><file name="config.xml" hash="1e37ab2f32d83b47ada846be90083f2a"/></dir><file name=".DS_Store" hash="fdeb1f9e27b18614e82b63502614920a"/></dir><file name=".DS_Store" hash="6bdfc4748c1cd4b9b59adf711021a276"/></dir></target><target name="mageetc"><dir name="modules"><file name="Skuiq_LogProductUpdate.xml" hash="6dbf41f8fd94ccccdd630f978a85b9ac"/><file name="Skuiq_SendSaleInfo.xml" hash="111d7a25f091d22b0ee6da65c3a8c58b"/><file name="Skuiq_SimpleConfigRelation.xml" hash="1a7141d7f82993c75e5e40e7a7df4ded"/></dir></target></contents>
+    <compatible/>
+    <dependencies><required><php><min>5.0.0</min><max>5.6.2</max></php></required></dependencies>
+</package>

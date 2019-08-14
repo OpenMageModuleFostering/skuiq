@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<config>
+  <api>
+    <resources>
+      <simpleconfigrelation_api translate="title" module="simpleconfigrelation">
+        <title>Myapi</title>
+        <acl>simpleconfigrelation/api</acl>
+        <model>simpleconfigrelation/api</model>
+        <methods>
+          <getrelationship translate="title" module="simpleconfigrelation">
+            <title>Relation Between</title>
+            <acl>simpleconfigrelation/getrelationship</acl>
+          </getrelationship>
+          <addrelationship translate="title" module="simpleconfigrelation">
+            <title>Relation Between</title>
+            <acl>simpleconfigrelation/addrelationship</acl>
+          </addrelationship>
+          <getchildsbyparentid translate="title" module="simpleconfigrelation">
+            <title>Child Product iDs</title>
+            <acl>simpleconfigrelation/getchildsbyparentid</acl>
+          </getchildsbyparentid>
+          <getvarienprice translate="title" module="simpleconfigrelation">
+            <title>Get Extra price on Varien</title>
+            <acl>simpleconfigrelation/getvarienprice</acl>
+          </getvarienprice>
+        </methods>
+      </simpleconfigrelation_api>
+    </resources>
+    <acl>
+      <resources>
+        <simpleconfigrelation translate="title" module="simpleconfigrelation">
+          <title>SimpleConfigRelation</title>
+          <sort_order>2000</sort_order>
+          <getrelationship translate="title" module="simpleconfigrelation">
+            <title>Get Relation Between</title>
+          </getrelationship>
+          <addrelationship translate="title" module="simpleconfigrelation">
+            <title>Create Relation Between</title>
+          </addrelationship>
+          <getchildsbyparentid translate="title" module="simpleconfigrelation">
+            <title>Child Product iDs</title>
+          </getchildsbyparentid>
+          <getvarienprice translate="title" module="simpleconfigrelation">
+            <title>Get Extra price on Varien</title>
+          </getvarienprice>
+        </simpleconfigrelation>
+      </resources>
+    </acl>
+  </api>
+</config>
