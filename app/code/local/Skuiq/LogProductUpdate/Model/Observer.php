@@ -1,10 +1,4 @@
 <?php
-/**
- * Our class name should follow the directory structure of
- * our Observer.php model, starting from the namespace,
- * replacing directory separators with underscores.
- * i.e. app/code/local/Skuiq/LogProductUpdate/Model/Observer.php
- */
 class Skuiq_LogProductUpdate_Model_Observer
 {
     public function logUpdate(Varien_Event_Observer $observer)
@@ -45,7 +39,6 @@ class Skuiq_LogProductUpdate_Model_Observer
                     $childArray[$i]["childID"] = $cID;
                     $childArray[$i]["quantity"] = $qty;
                     Mage::log(" QTY IS {$qty} for Child ID {$cID}", null, 'product-updates.txt');
-                    //$childArray = array_merge($childArray, $tmpArray);
                     $i++;
                 }
                 Mage::log((array_values($childArray)), null, 'product-updates.txt');
@@ -61,7 +54,6 @@ class Skuiq_LogProductUpdate_Model_Observer
         }
     }
 
-    // Called if a sale is cancelled
     public function stockChange(Varien_Event_Observer $observer)
     {
         $base_url = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB);
@@ -85,32 +77,43 @@ class Skuiq_LogProductUpdate_Model_Observer
         }
     }
 
-    // Called if a credit memo is created to cancel a sale
     public function refundOrderInventory(Varien_Event_Observer $observer)
     {
-        $base_url = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB);
-        $uri = "https://api.skuiq.com/magento/webhooks/cancel_order";
+      $base_url = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB);
+      $uri = "https://api.skuiq.com/magento/webhooks/cancel_order";
 
-        $creditmemo = $observer->getEvent()->getCreditmemo();
-        $items = array();
-        foreach ($creditmemo->getAllItems() as $item) {
-            $qty = $item->getQty();
-            $product_id = $item->getProductId();
-            $return = $item->getBackToStock();
-            $incrementId = $creditmemo->getIncrementId();
+      $creditmemo = $observer->getEvent()->getCreditmemo();
+  
+      $cr_uri = "https://api.skuiq.com/magento/webhooks/credit_memo";
+      $cr_memo_id =  $creditmemo->getIncrementId();
+      Mage::log(" Credit Memo ID:{$cr_memo_id}", null, 'product-updates.txt');
+      
+      $cr_client = new Zend_Http_Client($uri);
+      $cr_client->setHeaders('Content-type', 'application/json');
+      $cr_client->setParameterPost('base_url', $base_url);
+      $cr_client->setParameterPost('credit_memo_id', $cr_memo_id);
+      $response = $cr_client->request('POST');
+      
+      
+      $items = array();
+      foreach ($creditmemo->getAllItems() as $item) {
+        $qty = $item->getQty();
+        $product_id = $item->getProductId();
+        $return = $item->getBackToStock();
+        $incrementId = $creditmemo->getIncrementId();
 
-            if ($return == 1) {
-              Mage::log(" Stock Change - Credit Memo - Quantity:{$qty} Product ID:{$product} Return: {$return}", null, 'product-updates.txt');
-              $product["children"] = "";
-              $_item = Mage::getModel('catalog/product')->load($product_id);
-              $json = Mage::helper('core')->jsonEncode($_item);
-              $client = new Zend_Http_Client($uri);
-              $client->setHeaders('Content-type', 'application/json');
-              $client->setParameterPost('base_url', $base_url);
-              $client->setParameterPost('product', $json);
-              $client->setParameterPost('reason', 'credit_memo');
-              $response = $client->request('POST');
-            }
+        if ($return == 1) {
+          Mage::log(" Stock Change - Credit Memo - Quantity:{$qty} Product ID:{$product} Return: {$return}", null, 'product-updates.txt');
+          $product["children"] = "";
+          $_item = Mage::getModel('catalog/product')->load($product_id);
+          $json = Mage::helper('core')->jsonEncode($_item);
+          $client = new Zend_Http_Client($uri);
+          $client->setHeaders('Content-type', 'application/json');
+          $client->setParameterPost('base_url', $base_url);
+          $client->setParameterPost('product', $json);
+          $client->setParameterPost('reason', 'credit_memo');
+          $response = $client->request('POST');
         }
+      }
     }
 }

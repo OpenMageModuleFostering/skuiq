@@ -1,10 +1,6 @@
 <?php
 class Skuiq_SendSaleInfo_Model_Observer
 {
-    /**
-     * Magento passes a Varien_Event_Observer object as
-     * the first parameter of dispatched events.
-     */
     public function sendSale(Varien_Event_Observer $observer)
     {
         Mage::log("THIS IS A SALE been updated", null, 'product-updates.txt');
@@ -16,18 +12,14 @@ class Skuiq_SendSaleInfo_Model_Observer
         $incrementId = $order->getIncrementId();
         $ordered_items = $order->getAllItems();
         $shippingAddress = $order->getShippingAddress();
-        //$items = Mage::getModel('sales/order')->loadByIncrementId($incrementId);
-
+    
         foreach($ordered_items as $i):
-            //$item_sku = $i->getProductId();
-            //$items = $i;
-            //Mage::log("{$item_sku}. INFO", null, 'orders.txt');
             $ordered_items = Mage::helper('core')->jsonEncode($i);
             $item[] = $ordered_items;
         endforeach;
 
         $json_order = Mage::helper('core')->jsonEncode($order);
-        $json_order_items = $item; //Mage::helper('core')->jsonEncode($item);
+        $json_order_items = $item; 
         $json_ship_add = Mage::helper('core')->jsonEncode($shippingAddress);
 
         $client->setHeaders('Content-type', 'application/json');
@@ -55,8 +47,25 @@ class Skuiq_SendSaleInfo_Model_Observer
             }
         };
         $shipId = serialize($tracknums);
+      
+        $ordered_items = $order->getAllItems();
+        foreach($ordered_items as $i):
+            $ordered_items = Mage::helper('core')->jsonEncode($i);
+            $item[] = $ordered_items;
+        endforeach;
+        $shippingAddress = $order->getShippingAddress();
+ 
+
+        $json_order = Mage::helper('core')->jsonEncode($order);
+        $json_order_items = $item;
+        $json_ship_add = Mage::helper('core')->jsonEncode($shippingAddress);
 
         $client->setHeaders('Content-type', 'application/json');
+        $client->setParameterPost('base_url', $base_url);
+        $client->setParameterPost('order', $json_order);
+        $client->setParameterPost('items', $json_order_items);
+        $client->setParameterPost('ship_add', $json_ship_add);
+ 
         $client->setParameterPost('order_id', $last_orderid);
         $client->setParameterPost('status', $order_status);
         $client->setParameterPost('tracking', $shipId);

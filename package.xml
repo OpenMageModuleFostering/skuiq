@@ -1,18 +1,19 @@
 <?xml version="1.0"?>
 <package>
     <name>SKUIQ</name>
-    <version>1.2.3</version>
+    <version>1.2.4</version>
     <stability>stable</stability>
     <license>Open</license>
     <channel>community</channel>
     <extends/>
     <summary>Allows sync of products and sales from Magento to SKU IQ</summary>
     <description>Allows sync of products and sales from Magento to SKU IQ</description>
-    <notes>Additional code to improve functionality of adding children to configurable products</notes>
+    <notes>Improved credit Memo functionality&#xD;
+Improved Sales tracking</notes>
     <authors><author><name>Boutiika Labs</name><user>SKUIQ</user><email>dev@skuiq.com</email></author></authors>
-    <date>2015-03-24</date>
-    <time>03:34:20</time>
-    <contents><target name="magelocal"><dir name="Skuiq"><dir name="LogProductUpdate"><dir name="Model"><file name="Observer.php" hash="b21325c560e161e8522c7cdcdd3fb289"/></dir><dir name="etc"><file name="config.xml" hash="362ccb945d56d0e09bc64bdec4d7b2e8"/></dir></dir><dir name="SendSaleInfo"><dir name="Model"><file name="Observer.php" hash="dbc07f52c96bd3831e875df0135ea60a"/></dir><dir name="etc"><file name="config.xml" hash="9499133489324d19dc03c2a8f7a95e3e"/></dir></dir><dir name="SimpleConfigRelation"><dir name="Helper"><file name="Data.php" hash="3ef946f780001355f51a05c238c14886"/></dir><dir name="Model"><file name="Api.php" hash="89df86ac4009ebbb5c16f0da051e423a"/></dir><dir name="etc"><file name="api.xml" hash="4cc6bbf973cd7d7af47c6ea14af1e927"/><file name="config.xml" hash="1e37ab2f32d83b47ada846be90083f2a"/></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="Skuiq_LogProductUpdate.xml" hash="6dbf41f8fd94ccccdd630f978a85b9ac"/><file name="Skuiq_SendSaleInfo.xml" hash="111d7a25f091d22b0ee6da65c3a8c58b"/><file name="Skuiq_SimpleConfigRelation.xml" hash="1a7141d7f82993c75e5e40e7a7df4ded"/></dir></target></contents>
+    <date>2015-05-08</date>
+    <time>14:07:00</time>
+    <contents><target name="magelocal"><dir name="Skuiq"><dir name="LogProductUpdate"><dir name="Model"><file name="Observer.php" hash="4139bef98f261ecd807d8bdb2e25ea2d"/></dir><dir name="etc"><file name="config.xml" hash="362ccb945d56d0e09bc64bdec4d7b2e8"/></dir><file name=".DS_Store" hash="5c077e7e7765c52ee6bd8ea1883d84d5"/></dir><dir name="SendSaleInfo"><dir name="Model"><file name="Observer.php" hash="d09cf09a101c3eb5e3342125714f6141"/></dir><dir name="etc"><file name="config.xml" hash="9499133489324d19dc03c2a8f7a95e3e"/></dir></dir><dir name="SimpleConfigRelation"><dir name="Helper"><file name="Data.php" hash="3ef946f780001355f51a05c238c14886"/></dir><dir name="Model"><file name="Api.php" hash="89df86ac4009ebbb5c16f0da051e423a"/></dir><dir name="etc"><file name="api.xml" hash="4cc6bbf973cd7d7af47c6ea14af1e927"/><file name="config.xml" hash="1e37ab2f32d83b47ada846be90083f2a"/></dir><file name=".DS_Store" hash="194577a7e20bdcc7afbb718f502c134c"/></dir><file name=".DS_Store" hash="a6a932afdb7ee0835203a6b123a2c898"/></dir></target><target name="mageetc"><dir name="modules"><file name="Skuiq_LogProductUpdate.xml" hash="6dbf41f8fd94ccccdd630f978a85b9ac"/><file name="Skuiq_SendSaleInfo.xml" hash="111d7a25f091d22b0ee6da65c3a8c58b"/><file name="Skuiq_SimpleConfigRelation.xml" hash="1a7141d7f82993c75e5e40e7a7df4ded"/></dir></target></contents>
     <compatible/>
     <dependencies><required><php><min>5.0.0</min><max>5.6.2</max></php></required></dependencies>
 </package>
