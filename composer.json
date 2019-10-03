@@ -1,16 +1,19 @@
 {
-    "name": "OpenMageModuleFostering/SKUIQ",
+    "name": "OpenMageModuleFostering\/SKUIQ",
     "type": "magento-module",
     "license": "Open",
     "homepage": "",
     "description": "Sync products and sales from Magento to your in-store POS.",
     "authors": [
-    {
-        "name": "Boutiika Labs",
-        "email": "dev@skuiq.com"
-    }
-],
+        {
+            "name": "Boutiika Labs",
+            "email": "dev@skuiq.com"
+        }
+    ],
     "suggest": {
-        "magento-hackathon/magento-composer-installer": "*"
-    }
+        "magento-hackathon\/magento-composer-installer": "*"
+    },
+    "keywords": [
+        "openmage-module"
+    ]
 }
