@@ -1,3 +1,5 @@
+
+
 ## Original Package Description
 
 Sync products and sales from Magento to your in-store POS.
